@@ -1,63 +1,98 @@
-# 📊 Employee Attrition Analysis
+# 📊 Attrition Analysis using Python
 
-An exploratory data analysis (EDA) project focused on understanding **employee attrition and workforce-related patterns** using Python.
+A complete **Exploratory Data Analysis (EDA)** project performed on an **Employee Attrition dataset** using Python.
 
-This project analyzes an employee dataset using popular Python data analysis and visualization libraries such as **NumPy, Pandas, Matplotlib, and Seaborn**.
+The purpose of this project is to analyze different factors that may influence employees to leave an organization and extract meaningful insights from the data through **data cleaning, statistical analysis, outlier treatment, and visualization**.
 
-The complete analysis is available in the Jupyter Notebook, along with the original dataset in CSV format.
-
----
-
-## 📌 Project Overview
-
-Employee attrition is an important problem for organizations because frequent employee turnover can affect productivity, team performance, recruitment costs, and overall business growth.
-
-In this project, I performed **Exploratory Data Analysis (EDA)** on an employee attrition dataset to understand the data, identify patterns, analyze numerical and categorical variables, and detect potential outliers.
-
-The project focuses mainly on:
-
-* Understanding the dataset
-* Data inspection and exploration
-* Data cleaning and preprocessing
-* Statistical analysis
-* Numerical and categorical data analysis
-* Data visualization
-* Outlier identification
-* Finding useful patterns and relationships in the data
+This repository contains both the **Jupyter Notebook** containing the complete analysis and the **CSV dataset** used in the project.
 
 ---
 
-## 🎯 Objectives
+## 📌 About the Dataset
 
-The main objectives of this project are:
+The **Attrition Analytics dataset** represents an organization and contains information about employees and various factors related to their work and personal characteristics.
 
-1. Understand the structure of the employee dataset.
-2. Explore different features and their distributions.
-3. Perform data cleaning and preprocessing.
-4. Analyze numerical and categorical variables.
-5. Visualize important patterns using different plots.
-6. Identify possible outliers in numerical columns.
-7. Understand relationships between different variables.
-8. Extract meaningful insights from the dataset.
-9. Build practical experience with Python-based Exploratory Data Analysis.
+The original dataset contains:
+
+* **1,480 rows**
+* **38 columns**
+
+The dataset contains information related to:
+
+* Employee demographics
+* Age and age groups
+* Attrition
+* Business travel
+* Department
+* Gender
+* Education
+* Education field
+* Job role
+* Job level
+* Job satisfaction
+* Environment satisfaction
+* Salary
+* Monthly income
+* Overtime
+* Years at company
+* Total working years
+* Work-life balance
+* Relationship satisfaction
+* Stock options
+* Training
+* And other employee-related attributes
+
+The main objective of the analysis is to understand **why employees leave the organization and which factors are associated with higher attrition**.
 
 ---
 
-## 🛠️ Technologies & Libraries Used
+# 🎯 Objectives
 
-| Technology / Library | Purpose                            |
-| -------------------- | ---------------------------------- |
-| 🐍 Python            | Programming Language               |
-| 🔢 NumPy             | Numerical computations             |
-| 🐼 Pandas            | Data manipulation and analysis     |
-| 📊 Matplotlib        | Data visualization                 |
-| 🎨 Seaborn           | Statistical data visualization     |
-| 📓 Jupyter Notebook  | Development & analysis environment |
-| 📁 CSV               | Dataset format                     |
+The major objectives of this project are:
+
+* Understand the structure of the employee dataset
+* Explore the dataset using Pandas
+* Perform statistical analysis
+* Identify missing values
+* Handle missing data
+* Identify numerical and categorical columns
+* Analyze distributions of numerical features
+* Identify outliers
+* Remove/treat outliers
+* Identify and remove duplicate records
+* Create meaningful visualizations
+* Analyze employee attrition based on different factors
+* Calculate the overall attrition percentage
+* Extract useful business insights from the dataset
 
 ---
 
-## 📂 Repository Structure
+# 🛠️ Technologies & Libraries Used
+
+| Technology / Library | Purpose                                    |
+| -------------------- | ------------------------------------------ |
+| 🐍 Python            | Programming language                       |
+| 🔢 NumPy             | Numerical operations and outlier treatment |
+| 🐼 Pandas            | Data manipulation and analysis             |
+| 📊 Matplotlib        | Data visualization                         |
+| 🎨 Seaborn           | Statistical visualization                  |
+| 📓 Jupyter Notebook  | Development and analysis environment       |
+
+### Libraries Imported
+
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+
+warnings.filterwarnings('ignore')
+```
+
+---
+
+# 📂 Repository Structure
 
 ```text
 Attrition_Analysis/
@@ -67,233 +102,659 @@ Attrition_Analysis/
 └── 📖 README.md
 ```
 
-### Files Description
+### 📓 `Attrition_Analysis.ipynb`
 
-### `Attrition_Analysis.ipynb`
+Contains the complete Exploratory Data Analysis performed on the dataset.
 
-The main Jupyter Notebook containing the complete analysis.
+### 📊 `Attrition_Analytics.csv`
 
-It includes:
+The CSV dataset used for the complete analysis.
 
-* Data loading
-* Data inspection
-* Data preprocessing
-* Exploratory analysis
-* Statistical analysis
-* Data visualization
-* Outlier identification
-* Observations and insights
+### 📖 `README.md`
 
-### `Attrition_Analytics.csv`
-
-The dataset used for performing the analysis.
-
-### `README.md`
-
-Project documentation containing information about the project, technologies, methodology, and key observations.
+Project documentation and explanation of the analysis.
 
 ---
 
-# 🔍 Analysis Performed
+# 🔍 Exploratory Data Analysis
 
-## 1. Data Loading
+## 1. Loading the Dataset
 
-The dataset was imported into Python using **Pandas**.
+The CSV dataset was loaded using Pandas:
 
 ```python
-import pandas as pd
+df = pd.read_csv('/content/Attrition_Analytics.csv')
+```
 
-df = pd.read_csv("Attrition_Analytics.csv")
+The dataset contains:
+
+```text
+Rows    : 1480
+Columns : 38
 ```
 
 ---
 
-## 2. Data Inspection
+# 📋 2. Dataset Statistics
 
-The dataset was explored using Pandas functions to understand:
-
-* Number of rows and columns
-* Column names
-* Data types
-* Missing values
-* Statistical information
-* Unique values
-
-Common functions used include:
+The `describe()` function was used to understand the statistical properties of numerical features.
 
 ```python
-df.head()
-df.tail()
-df.shape
-df.info()
 df.describe()
-df.isnull().sum()
-df.nunique()
+```
+
+This provides information such as:
+
+* Count
+* Mean
+* Standard deviation
+* Minimum
+* 25th percentile
+* Median
+* 75th percentile
+* Maximum
+
+For example, the `Age` column has:
+
+```text
+Minimum Age : 18
+Maximum Age : 60
+Mean Age    : ~36.92
+Median Age  : 36
 ```
 
 ---
 
-## 3. Data Cleaning
+# 🚨 3. Missing Value Analysis
 
-Before performing analysis, the dataset was checked for common data quality issues such as:
+The dataset was checked for missing values using:
 
-* Missing values
-* Duplicate records
-* Incorrect data types
-* Inconsistent values
-* Unusual observations
+```python
+df.isnull().sum()
+```
 
-The required preprocessing steps were performed before visualization and analysis.
+### Initial Result
+
+A total of **57 missing values** were found.
+
+All 57 missing values were present in:
+
+```text
+YearsWithCurrManager
+```
+
+The mean value of this column was approximately:
+
+```text
+4.118
+```
+
+The missing values were then replaced using the rounded mean:
+
+```python
+df['YearsWithCurrManager'].fillna(
+    round(df['YearsWithCurrManager'].mean()),
+    inplace=True
+)
+```
+
+After imputation, the dataset contained **0 missing values**.
 
 ---
 
-# 📊 Exploratory Data Analysis
+# 🔢 4. Numerical & Categorical Features
 
-Exploratory Data Analysis was performed to understand the distribution and characteristics of the employee data.
+The dataset was divided into numerical and categorical columns.
 
-Different numerical and categorical variables were analyzed using statistical methods and visualizations.
+### Numerical Columns
 
-### Numerical Analysis
+The dataset contains:
 
-Numerical columns were analyzed using:
+```text
+26 Numerical Columns
+```
 
-* Mean
-* Median
-* Minimum
-* Maximum
-* Standard deviation
-* Quartiles
-* Distribution plots
-* Box plots
+These were identified using:
+
+```python
+num_numeric_cols = df.select_dtypes(
+    include=['int64','float64']
+)
+```
+
+### Categorical Columns
+
+The dataset contains:
+
+```text
+12 Categorical Columns
+```
+
+These were identified using:
+
+```python
+num_categorical_cols = df.select_dtypes(
+    include=['object']
+)
+```
+
+---
+
+# 📈 5. Distribution Analysis
+
+Histograms were generated for numerical features to understand their distributions.
+
+```python
+df.hist(
+    bins=10,
+    layout=(6,5),
+    figsize=(10,10)
+)
+
+plt.tight_layout()
+plt.show()
+```
+
+This helped in understanding:
+
+* Feature distributions
+* Frequency patterns
+* Spread of numerical values
+* Possible unusual observations
+
+---
+
+# 🎯 6. Feature Selection
+
+For focused analysis, the following columns were selected:
+
+```python
+selected_cols = [
+    'EmpID',
+    'Age',
+    'AgeGroup',
+    'Attrition',
+    'Department',
+    'Gender',
+    'EducationField',
+    'SalarySlab',
+    'YearsAtCompany',
+    'MonthlyIncome'
+]
+```
+
+A new DataFrame was created:
+
+```python
+df1 = df[selected_cols]
+```
+
+An additional binary column was created to represent attrition:
+
+```python
+df1['Attrition Count'] = df1['Attrition'].apply(
+    lambda x: 1 if x == 'Yes' else 0
+)
+```
+
+Where:
+
+```text
+1 → Employee left the organization
+0 → Employee stayed in the organization
+```
+
+---
+
+# 🚨 7. Outlier Identification
+
+Box plots were used to identify outliers in important numerical columns.
+
+### Age
+
+```python
+sns.boxplot(y="Age", data=df1)
+```
+
+**Observation:**
+No significant outliers were identified in the `Age` column.
+
+---
+
+### Years At Company
+
+```python
+sns.boxplot(
+    y='YearsAtCompany',
+    data=df1
+)
+```
+
+**Observation:**
+Outliers were identified in the `YearsAtCompany` column.
+
+---
+
+### Monthly Income
+
+```python
+sns.boxplot(
+    y='MonthlyIncome',
+    data=df1
+)
+```
+
+**Observation:**
+Outliers were identified in the `MonthlyIncome` column.
+
+---
+
+# 🧮 8. Outlier Treatment
+
+The **IQR (Interquartile Range)** method was used to identify the lower and upper bounds.
+
+```python
+def remove_outlier(col_name):
+    sorted(col_name)
+    Q1, Q3 = col_name.quantile([0.25, 0.75])
+    IQR = Q3 - Q1
+
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+
+    return lower_bound, upper_bound
+```
+
+The outliers in:
+
+* `YearsAtCompany`
+* `MonthlyIncome`
+
+were treated by capping values at the calculated lower and upper bounds.
 
 Example:
 
 ```python
-df.describe()
+df1['YearsAtCompany'] = np.where(
+    df1['YearsAtCompany'] > high,
+    high,
+    df1['YearsAtCompany']
+)
+```
+
+The same approach was applied to `MonthlyIncome`.
+
+---
+
+# 🧹 9. Duplicate Removal
+
+The selected dataset initially contained:
+
+```text
+1480 rows
+```
+
+Duplicate records were removed using:
+
+```python
+df_cleaned = df1.drop_duplicates()
+```
+
+### Result
+
+```text
+Initial Rows       : 1480
+Duplicate Rows     : 10
+Final Rows         : 1470
+```
+
+Therefore, the final cleaned dataset contains:
+
+```text
+1470 employee records
 ```
 
 ---
 
-## 📈 Data Visualization
+# 📊 Visualization & Attrition Analysis
 
-Several visualization techniques were used to better understand the dataset.
-
-### Libraries Used
-
-```python
-import matplotlib.pyplot as plt
-import seaborn as sns
-```
-
-Visualizations included:
-
-* Histograms
-* Count plots
-* Box plots
-* Distribution plots
-* Bar charts
-* Relationship plots
-* Correlation analysis
-
-Visualization helped make patterns in the dataset easier to understand.
+After cleaning the dataset, different visualizations were created to understand employee attrition.
 
 ---
 
-# 🚨 Outlier Identification
+## 👥 10. Attrition by Gender
 
-Outlier detection was also performed as part of the analysis.
-
-For example, a **box plot** was used to analyze the `Age` column.
+A bar plot was used to analyze attrition based on gender.
 
 ```python
-sns.boxplot(y="Age", data=df)
+sns.barplot(
+    x='Gender',
+    y='Attrition Count',
+    data=df_cleaned,
+    estimator=sum
+)
+
+plt.title('Attrition by Gender')
 plt.show()
 ```
-
-The box plot helped identify whether unusually high or low age values were present.
 
 ### Observation
 
-The analysis showed that there were **no significant outliers present in the Age column**.
+According to the analysis, **male employees had higher attrition than female employees**.
 
 ---
 
-# 🔗 Correlation Analysis
+# 🎓 11. Attrition by Education Field
 
-Correlation analysis can be used to understand relationships between numerical variables.
+A pie chart was used to analyze attrition based on employees' education fields.
 
-A correlation matrix can be generated using:
+Education fields present in the dataset include:
+
+* Life Sciences
+* Medical
+* Marketing
+* Technical Degree
+* Other
+* Human Resources
+
+The distribution of employees by education field was also examined.
 
 ```python
-df.corr(numeric_only=True)
+df_cleaned['EducationField'].value_counts()
 ```
 
-A heatmap can then be used to visualize these relationships:
+### Observation
+
+Employees from the **Life Sciences** education field accounted for the highest attrition in the analysis.
+
+---
+
+# 👶 12. Attrition by Age Group
+
+A bar plot was used to analyze attrition across different age groups.
 
 ```python
-sns.heatmap(df.corr(numeric_only=True), annot=True)
+sns.barplot(
+    x='Attrition Count',
+    y='AgeGroup',
+    data=df_cleaned,
+    estimator=sum
+)
+
+plt.title('Attrition by AgeGroup')
 plt.show()
 ```
 
-This helps identify variables that have positive, negative, or weak relationships with each other.
+### Observation
+
+The **26–35 age group** had the highest attrition.
+
+Employees in the **55+ age group** had the lowest attrition.
 
 ---
 
-# 💡 Key Learning Outcomes
+# 💰 13. Attrition by Salary Slab
 
-Through this project, I gained practical experience in:
+Attrition was analyzed based on salary slabs.
 
-* Working with real-world datasets
-* Loading CSV files using Pandas
-* Understanding DataFrames
-* Data inspection and cleaning
-* Handling numerical and categorical data
-* Performing exploratory data analysis
-* Creating statistical visualizations
-* Using Matplotlib and Seaborn
-* Detecting outliers using box plots
-* Understanding correlations between variables
-* Extracting insights from data
-* Working with Jupyter Notebooks
+```python
+sns.barplot(
+    x='SalarySlab',
+    y='Attrition Count',
+    data=df_cleaned,
+    estimator=sum
+)
+
+plt.title('Attrition by Salary Slab')
+plt.show()
+```
+
+### Observation
+
+The analysis showed that employees in the **lower salary slab had higher attrition**, while employees earning in the higher salary slab had comparatively lower attrition.
+
+---
+
+# 🏢 14. Attrition by Years at Company
+
+A line plot was used to analyze attrition based on the number of years employees had spent at the company.
+
+```python
+plt.figure(figsize=(10,40))
+
+df_cleaned.groupby(
+    ['YearsAtCompany']
+).sum().plot(
+    kind='line',
+    y='Attrition Count'
+)
+
+plt.title('Attrition by YearsAtCompany')
+plt.show()
+```
+
+### Observation
+
+The analysis showed that a large portion of attrition came from employees with **less than approximately 2.5 years of experience at the company**.
+
+Employees with around **12 years at the company** showed comparatively lower attrition.
+
+---
+
+# 🏭 15. Attrition by Department
+
+Department-wise attrition was also analyzed.
+
+```python
+sns.barplot(
+    x='Department',
+    y='Attrition Count',
+    data=df_cleaned,
+    estimator=sum
+)
+
+plt.title('Attrition by Department')
+```
+
+### Observation
+
+The **Research & Development** department had the highest attrition.
+
+The **Human Resources** department had the lowest attrition.
+
+---
+
+# 📌 16. Attrition vs Stable Employees
+
+A count plot was used to compare employees who left the organization with those who remained.
+
+```python
+sns.countplot(
+    x='Attrition Count',
+    data=df_cleaned
+)
+
+plt.title('Attrition vs Stable Employees')
+```
+
+The analysis showed that approximately **237 employees left the organization**.
+
+---
+
+# 📈 17. Overall Attrition Percentage
+
+The total number of employees who left was calculated using:
+
+```python
+attrition_count = df_cleaned['Attrition Count'].sum()
+
+print(
+    "Total Employees left the Organization:",
+    attrition_count
+)
+```
+
+### Result
+
+```text
+Employees who left : 237
+```
+
+The final dataset contained:
+
+```text
+Total Employees : 1470
+```
+
+The overall attrition percentage was calculated using:
+
+```python
+attrition_percent = (
+    attrition_count / total_employees
+) * 100
+```
+
+### Result
+
+```text
+Attrition Percentage ≈ 16.12%
+```
+
+Therefore, approximately **16% of employees in the cleaned dataset had left the organization**.
+
+---
+
+# 💡 Key Insights
+
+Based on the analysis performed in this notebook:
+
+### 👥 Gender
+
+Male employees showed higher attrition than female employees.
+
+### 🎓 Education Field
+
+The **Life Sciences** education field had the highest attrition among the education fields analyzed.
+
+### 👶 Age Group
+
+Employees between **26–35 years** showed the highest attrition.
+
+### 💰 Salary
+
+Employees in lower salary slabs showed comparatively higher attrition.
+
+### 🏢 Department
+
+The **Research & Development** department had the highest attrition.
+
+### ⏳ Years at Company
+
+Employees with relatively short tenure, particularly those with less than approximately **2.5 years at the company**, contributed significantly to attrition.
+
+### 📊 Overall Attrition
+
+The cleaned dataset contained:
+
+```text
+1470 Employees
+237 Employees Left
+16.12% Attrition Rate
+```
+
+---
+
+# 🔄 Data Analysis Workflow
+
+The complete workflow followed in this project can be summarized as:
+
+```text
+                ┌─────────────────────┐
+                │   Load CSV Dataset  │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │   Explore Dataset   │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Statistical Analysis│
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Missing Value Check │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Handle Missing Data │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Feature Selection   │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Outlier Detection   │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Outlier Treatment   │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Remove Duplicates   │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Visualization       │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Extract Insights    │
+                └──────────┬──────────┘
+                           ↓
+                ┌─────────────────────┐
+                │ Attrition Analysis  │
+                └─────────────────────┘
+```
 
 ---
 
 # 🧠 Concepts Practiced
 
-The major Python and Data Analysis concepts practiced in this project include:
+Through this project, I practiced:
 
-```text
-Python
-│
-├── NumPy
-│   ├── Arrays
-│   ├── Numerical Operations
-│   └── Statistical Operations
-│
-├── Pandas
-│   ├── DataFrames
-│   ├── Data Loading
-│   ├── Data Cleaning
-│   ├── Data Filtering
-│   └── Data Analysis
-│
-├── Matplotlib
-│   ├── Line Plots
-│   ├── Bar Charts
-│   ├── Histograms
-│   └── Custom Visualization
-│
-└── Seaborn
-    ├── Count Plots
-    ├── Box Plots
-    ├── Distribution Plots
-    ├── Heatmaps
-    └── Statistical Visualization
-```
+* Python programming
+* NumPy
+* Pandas
+* DataFrames
+* CSV data handling
+* Data inspection
+* Descriptive statistics
+* Missing value detection
+* Missing value imputation
+* Numerical and categorical feature identification
+* Feature selection
+* Lambda functions
+* Data transformation
+* Histograms
+* Bar plots
+* Pie charts
+* Line plots
+* Count plots
+* Box plots
+* Outlier detection
+* IQR method
+* Outlier capping
+* Duplicate detection and removal
+* GroupBy operations
+* Data aggregation
+* Exploratory Data Analysis
+* Business-oriented data interpretation
 
 ---
 
-# 🚀 How to Run This Project
+# 🚀 How to Run the Project
 
 ## 1. Clone the Repository
 
@@ -301,7 +762,7 @@ Python
 git clone https://github.com/SagarSharma131006/Attrition_Analysis.git
 ```
 
-## 2. Navigate to the Project Directory
+## 2. Navigate to the Project
 
 ```bash
 cd Attrition_Analysis
@@ -313,148 +774,114 @@ cd Attrition_Analysis
 pip install numpy pandas matplotlib seaborn jupyter
 ```
 
-Or:
-
-```bash
-pip install -r requirements.txt
-```
-
-> If a `requirements.txt` file is not available in the repository, install the libraries using the first command.
-
----
-
 ## 4. Start Jupyter Notebook
 
 ```bash
 jupyter notebook
 ```
 
-Then open:
+Open:
 
 ```text
 Attrition_Analysis.ipynb
 ```
 
-Run the notebook cells sequentially to reproduce the analysis.
-
----
-
-# 📸 Project Preview
-
-The project includes different visualizations for understanding the employee dataset.
-
-One of the analyses performed in the notebook is **outlier identification using a box plot**.
-
-Example:
+Make sure the following files are available in the same project environment:
 
 ```text
-                Age Distribution
-
-        ┌──────────────────────────┐
-        │        ┌──────────┐       │
-        │        │          │       │
-        │────────│   Age    │────────
-        │        │          │       │
-        │        └──────────┘       │
-        └──────────────────────────┘
-
-        No significant outliers
-        detected in Age column.
+Attrition_Analysis.ipynb
+Attrition_Analytics.csv
 ```
+
+Then run the notebook cells sequentially.
 
 ---
 
 # 📌 Project Highlights
 
-✨ Complete Exploratory Data Analysis
+✨ Complete Employee Attrition EDA
 
-📊 Multiple data visualizations
+🐍 Python-based data analysis
 
-🐼 Pandas-based data manipulation
+🐼 Pandas data manipulation
 
-🔢 NumPy-based numerical analysis
+🔢 NumPy numerical operations
 
-📈 Matplotlib visualizations
+📊 Matplotlib visualization
 
-🎨 Seaborn statistical visualizations
+🎨 Seaborn visualization
 
-🚨 Outlier detection
+🚨 Missing value handling
 
-🔍 Data exploration and pattern identification
+📉 Outlier detection and treatment
 
-📁 Dataset included with the project
+🧹 Duplicate removal
 
-📓 Complete analysis available in Jupyter Notebook
+📈 Attrition percentage calculation
 
----
+🔍 Business-oriented insights
 
-# 📚 What I Learned
+📁 Dataset included
 
-This project helped me understand how Python can be used to analyze a dataset from beginning to end.
-
-Instead of only learning individual libraries theoretically, I practiced using **NumPy, Pandas, Matplotlib, and Seaborn together in a practical data analysis workflow**.
-
-The project also improved my understanding of how to inspect data, visualize distributions, identify outliers, and extract meaningful information from a dataset.
+📓 Complete Jupyter Notebook included
 
 ---
 
 # 🔮 Future Improvements
 
-The project can be extended further by adding:
+This project currently focuses on **Exploratory Data Analysis**.
 
-* [ ] More detailed statistical analysis
-* [ ] Advanced feature relationships
-* [ ] Interactive visualizations
-* [ ] Dashboard using Power BI or Tableau
-* [ ] Employee attrition prediction using Machine Learning
+Possible future improvements include:
+
 * [ ] Feature engineering
-* [ ] Classification models
+* [ ] Correlation analysis
+* [ ] Advanced statistical analysis
+* [ ] Interactive dashboard using Power BI
+* [ ] Interactive dashboard using Streamlit
+* [ ] Employee attrition prediction
+* [ ] Machine Learning classification models
+* [ ] Logistic Regression
+* [ ] Decision Tree
+* [ ] Random Forest
 * [ ] Model evaluation
+* [ ] Hyperparameter tuning
 * [ ] Deployment of an attrition prediction model
 
 ---
 
-# 🤝 Contribution
+# 📚 Learning Outcome
 
-This repository is primarily created for learning and documenting my progress in **Python, Data Analysis, and Machine Learning**.
+This project helped me understand how to perform a complete **Exploratory Data Analysis workflow** on an employee dataset.
 
-Suggestions, improvements, and feedback are always welcome.
+I learned how to move from raw CSV data to a cleaned dataset and then use visualization and statistical techniques to identify patterns related to employee attrition.
 
-If you find something useful or have an idea for improving the analysis, feel free to contribute.
-
----
-
-# ⭐ Support
-
-If you found this project useful, consider giving the repository a ⭐ on GitHub.
+The project also provided practical experience with **NumPy, Pandas, Matplotlib, and Seaborn** and strengthened my understanding of data cleaning, missing value handling, outlier treatment, duplicate removal, and data visualization.
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Sagar Sharma**
 
 B.Tech CSE — Artificial Intelligence & Machine Learning
 
-Interested in:
+### Interests
 
 * 🤖 Artificial Intelligence
 * 🧠 Machine Learning
 * 📊 Data Science
+* 📈 Data Analysis
 * 🐍 Python
 * 💻 Problem Solving
-* 📈 Data Analysis
 
 ---
 
-## 📌 Repository
+# ⭐ Support
 
-**Attrition Analysis**
-
-> A practical Python Exploratory Data Analysis project using NumPy, Pandas, Matplotlib, and Seaborn.
+If you found this project useful or interesting, consider giving this repository a ⭐ on GitHub.
 
 ---
 
-### 📜 License
+## 📜 License
 
 This project is created for **educational and learning purposes**.
